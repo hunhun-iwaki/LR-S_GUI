@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="../../common/css/style.css" rel="stylesheet" />
+    <link href="../../common/css/all.css" rel="stylesheet" />
+    <title>LR-S</title>
+  </head>
+
+  <body>
+    <header>
+      <h1 class="title">LR-S</h1>
+      <button id="serialConnect" class="btn-connect">接続</button>
+      <div id="loadingAnime" class="animoSpinner animoSpinner--none"></div>
+      <br />
+    </header>
+    <hr class="divider" />
+    <div id="mainView" class="main-view">
+      <div class="controller-view" id="controllerView">
+        <div class="wrapper-stasus">
+          <div class="id-container">
+            <label for="inID" class="id-container__label">ID:</label>
+            <input
+              type="number"
+              id="inID"
+              name="ID"
+              value="1"
+              min="0"
+              max="15"
+              class="id-container__input"
+            />
+          </div>
+          <div class="pumplist-container" >
+            <i class="fa-solid fa-table-list" id="pumplistIcon"></i>
+            <dialog id="diagPumpList">
+              <div>
+              <div id = "pumplistAnimoSpinner" class="animoSpinner"></div>
+              <table id="pumplistTable" class="pumplist-container__table">
+                <thead>
+                  <tr>
+                    <th data-column-item="RESET"></th>
+                    <th data-column-item="LED"></th>
+                    <th data-column-item="STATUS"></th>
+                    <th data-column-item="ID">ID</th>
+                    <th data-column-item="RUN">RUN</th>
+                    <th data-column-item="PAUSE">PAUSE</th>
+                    <th data-column-item="STOP">STOP</th>
+                    <th data-column-item="MODE">MODE</th>
+                    <th data-column-item="SPM">SPM</th>
+                    <th data-column-item="SL">SL</th>
+                    <th data-column-item="TYPE">TYPE</th>
+                    <th data-column-item="APSPM">A/P SPM</th>
+                    <th data-column-item="BATCH_IN">BATCH_IN</th>
+                    <th data-column-item="BATCH_SET"></th>
+                    <th data-column-item="BATCH_LEFT">BATCH_LEFT</th>
+                    <th data-column-item="SYNC_EN">Sync</th>
+                    <th data-column-item="SYNC_GROUP">SyncGrp</th>
+                    <th data-column-item="SYNC_MAIN">SyncMain</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><i class="fa-solid fa-arrows-rotate"></i></td>
+                    <td><div class="led-off"></div></td>
+                    <td><i>disconnect</i></td>
+                    <td>1</td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-play"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-pause"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-stop"></i></td>
+                    <td class ="pumplist-container__table--active">MANUAL</td>
+                    <td>720.00</td>
+                    <td>1.00</td>
+                    <td>SINE</td>
+                    <td><i class="fa-solid fa-gear"></i></td>
+                    <td><input 
+                              type="number"
+                              step="any"
+                              style="width:100%; height:100%; margin:0; padding:0;border:none; text-align: center;"/>
+                    </td>
+                    <td><i class="fa-solid fa-right-long"></i></td>
+                    <td>--.--</td>
+                    <td><i class="fa-solid fa-check"></i></td>
+                    <td>1</td>
+                    <td><i class="fa-solid fa-flag"></i></td>                    
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-arrows-rotate"></i></td>
+                    <td><div class="led-off"></div></td>
+                    <td><i>disconnect</i></td>
+                    <td>1</td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-play"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-pause"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-stop"></i></td>
+                    <td class ="pumplist-container__table--active">MANUAL</td>
+                    <td>720.00</td>
+                    <td>1.00</td>
+                    <td>SINE</td>
+                    <td><i class="fa-solid fa-gear"></i></td>
+                    <td><input 
+                              type="number"
+                              step="any"
+                              style="width:100%; height:100%; margin:0; padding:0;border:none; text-align: center;"/>
+                    </td>
+                    <td><i class="fa-solid fa-right-long"></i></td>
+                    <td>--.--</td>
+                    <td><i class="fa-solid fa-check"></i></td>
+                    <td>1</td>
+                    <td><i class="fa-solid fa-flag"></i></td>                    
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-arrows-rotate"></i></td>
+                    <td><div class="led-off"></div></td>
+                    <td><i>disconnect</i></td>
+                    <td>1</td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-play"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-pause"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-stop"></i></td>
+                    <td class ="pumplist-container__table--active">MANUAL</td>
+                    <td>720.00</td>
+                    <td>1.00</td>
+                    <td>SINE</td>
+                    <td><i class="fa-solid fa-gear"></i></td>
+                    <td><input 
+                              type="number"
+                              step="any"
+                              style="width:100%; height:100%; margin:0; padding:0;border:none; text-align: center;"/>
+                    </td>
+                    <td><i class="fa-solid fa-right-long"></i></td>
+                    <td>--.--</td>
+                    <td><i class="fa-solid fa-check"></i></td>
+                    <td>1</td>
+                    <td><i class="fa-solid fa-flag"></i></td>                    
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-arrows-rotate"></i></td>
+                    <td><div class="led-off"></div></td>
+                    <td><i>disconnect</i></td>
+                    <td>1</td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-play"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-pause"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-stop"></i></td>
+                    <td class ="pumplist-container__table--active">MANUAL</td>
+                    <td>720.00</td>
+                    <td>1.00</td>
+                    <td>SINE</td>
+                    <td><i class="fa-solid fa-gear"></i></td>
+                    <td><input 
+                              type="number"
+                              step="any"
+                              style="width:100%; height:100%; margin:0; padding:0;border:none; text-align: center;"/>
+                    </td>
+                    <td><i class="fa-solid fa-right-long"></i></td>
+                    <td>--.--</td>
+                    <td><i class="fa-solid fa-check"></i></td>
+                    <td>1</td>
+                    <td><i class="fa-solid fa-flag"></i></td>                    
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-arrows-rotate"></i></td>
+                    <td><div class="led-off"></div></td>
+                    <td><i>disconnect</i></td>
+                    <td>1</td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-play"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-pause"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-stop"></i></td>
+                    <td class ="pumplist-container__table--active">MANUAL</td>
+                    <td>720.00</td>
+                    <td>1.00</td>
+                    <td>SINE</td>
+                    <td><i class="fa-solid fa-gear"></i></td>
+                    <td><input 
+                              type="number"
+                              step="any"
+                              style="width:100%; height:100%; margin:0; padding:0;border:none; text-align: center;"/>
+                    </td>
+                    <td><i class="fa-solid fa-right-long"></i></td>
+                    <td>--.--</td>
+                    <td><i class="fa-solid fa-check"></i></td>
+                    <td>1</td>
+                    <td><i class="fa-solid fa-flag"></i></td>                    
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-arrows-rotate"></i></td>
+                    <td><div class="led-off"></div></td>
+                    <td><i>disconnect</i></td>
+                    <td>1</td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-play"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-pause"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-stop"></i></td>
+                    <td class ="pumplist-container__table--active">MANUAL</td>
+                    <td>720.00</td>
+                    <td>1.00</td>
+                    <td>SINE</td>
+                    <td><i class="fa-solid fa-gear"></i></td>
+                    <td><input 
+                              type="number"
+                              step="any"
+                              style="width:100%; height:100%; margin:0; padding:0;border:none; text-align: center;"/>
+                    </td>
+                    <td><i class="fa-solid fa-right-long"></i></td>
+                    <td>--.--</td>
+                    <td><i class="fa-solid fa-check"></i></td>
+                    <td>1</td>
+                    <td><i class="fa-solid fa-flag"></i></td>                    
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-arrows-rotate"></i></td>
+                    <td><div class="led-off"></div></td>
+                    <td><i>disconnect</i></td>
+                    <td>1</td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-play"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-pause"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-stop"></i></td>
+                    <td class ="pumplist-container__table--active">MANUAL</td>
+                    <td>720.00</td>
+                    <td>1.00</td>
+                    <td>SINE</td>
+                    <td><i class="fa-solid fa-gear"></i></td>
+                    <td><input 
+                              type="number"
+                              step="any"
+                              style="width:100%; height:100%; margin:0; padding:0;border:none; text-align: center;"/>
+                    </td>
+                    <td><i class="fa-solid fa-right-long"></i></td>
+                    <td>--.--</td>
+                    <td><i class="fa-solid fa-check"></i></td>
+                    <td>1</td>
+                    <td><i class="fa-solid fa-flag"></i></td>                    
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-arrows-rotate"></i></td>
+                    <td><div class="led-off"></div></td>
+                    <td><i>disconnect</i></td>
+                    <td>1</td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-play"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-pause"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-stop"></i></td>
+                    <td class ="pumplist-container__table--active">MANUAL</td>
+                    <td>720.00</td>
+                    <td>1.00</td>
+                    <td>SINE</td>
+                    <td><i class="fa-solid fa-gear"></i></td>
+                    <td><input 
+                              type="number"
+                              step="any"
+                              style="width:100%; height:100%; margin:0; padding:0;border:none; text-align: center;"/>
+                    </td>
+                    <td><i class="fa-solid fa-right-long"></i></td>
+                    <td>--.--</td>
+                    <td><i class="fa-solid fa-check"></i></td>
+                    <td>1</td>
+                    <td><i class="fa-solid fa-flag"></i></td>                    
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-arrows-rotate"></i></td>
+                    <td><div class="led-off"></div></td>
+                    <td><i>disconnect</i></td>
+                    <td>1</td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-play"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-pause"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-stop"></i></td>
+                    <td class ="pumplist-container__table--active">MANUAL</td>
+                    <td>720.00</td>
+                    <td>1.00</td>
+                    <td>SINE</td>
+                    <td><i class="fa-solid fa-gear"></i></td>
+                    <td><input 
+                              type="number"
+                              step="any"
+                              style="width:100%; height:100%; margin:0; padding:0;border:none; text-align: center;"/>
+                    </td>
+                    <td><i class="fa-solid fa-right-long"></i></td>
+                    <td>--.--</td>
+                    <td><i class="fa-solid fa-check"></i></td>
+                    <td>1</td>
+                    <td><i class="fa-solid fa-flag"></i></td>                    
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-arrows-rotate"></i></td>
+                    <td><div class="led-off"></div></td>
+                    <td><i>disconnect</i></td>
+                    <td>1</td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-play"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-pause"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-stop"></i></td>
+                    <td class ="pumplist-container__table--active">MANUAL</td>
+                    <td>720.00</td>
+                    <td>1.00</td>
+                    <td>SINE</td>
+                    <td><i class="fa-solid fa-gear"></i></td>
+                    <td><input 
+                              type="number"
+                              step="any"
+                              style="width:100%; height:100%; margin:0; padding:0;border:none; text-align: center;"/>
+                    </td>
+                    <td><i class="fa-solid fa-right-long"></i></td>
+                    <td>--.--</td>
+                    <td><i class="fa-solid fa-check"></i></td>
+                    <td>1</td>
+                    <td><i class="fa-solid fa-flag"></i></td>                    
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-arrows-rotate"></i></td>
+                    <td><div class="led-off"></div></td>
+                    <td><i>disconnect</i></td>
+                    <td>1</td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-play"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-pause"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-stop"></i></td>
+                    <td class ="pumplist-container__table--active">MANUAL</td>
+                    <td>720.00</td>
+                    <td>1.00</td>
+                    <td>SINE</td>
+                    <td><i class="fa-solid fa-gear"></i></td>
+                    <td><input 
+                              type="number"
+                              step="any"
+                              style="width:100%; height:100%; margin:0; padding:0;border:none; text-align: center;"/>
+                    </td>
+                    <td><i class="fa-solid fa-right-long"></i></td>
+                    <td>--.--</td>
+                    <td><i class="fa-solid fa-check"></i></td>
+                    <td>1</td>
+                    <td><i class="fa-solid fa-flag"></i></td>                    
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-arrows-rotate"></i></td>
+                    <td><div class="led-off"></div></td>
+                    <td><i>disconnect</i></td>
+                    <td>1</td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-play"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-pause"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-stop"></i></td>
+                    <td class ="pumplist-container__table--active">MANUAL</td>
+                    <td>720.00</td>
+                    <td>1.00</td>
+                    <td>SINE</td>
+                    <td><i class="fa-solid fa-gear"></i></td>
+                    <td><input 
+                              type="number"
+                              step="any"
+                              style="width:100%; height:100%; margin:0; padding:0;border:none; text-align: center;"/>
+                    </td>
+                    <td><i class="fa-solid fa-right-long"></i></td>
+                    <td>--.--</td>
+                    <td><i class="fa-solid fa-check"></i></td>
+                    <td>1</td>
+                    <td><i class="fa-solid fa-flag"></i></td>                    
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-arrows-rotate"></i></td>
+                    <td><div class="led-off"></div></td>
+                    <td><i>disconnect</i></td>
+                    <td>1</td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-play"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-pause"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-stop"></i></td>
+                    <td class ="pumplist-container__table--active">MANUAL</td>
+                    <td>720.00</td>
+                    <td>1.00</td>
+                    <td>SINE</td>
+                    <td><i class="fa-solid fa-gear"></i></td>
+                    <td><input 
+                              type="number"
+                              step="any"
+                              style="width:100%; height:100%; margin:0; padding:0;border:none; text-align: center;"/>
+                    </td>
+                    <td><i class="fa-solid fa-right-long"></i></td>
+                    <td>--.--</td>
+                    <td><i class="fa-solid fa-check"></i></td>
+                    <td>1</td>
+                    <td><i class="fa-solid fa-flag"></i></td>                    
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-arrows-rotate"></i></td>
+                    <td><div class="led-off"></div></td>
+                    <td><i>disconnect</i></td>
+                    <td>1</td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-play"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-pause"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-stop"></i></td>
+                    <td class ="pumplist-container__table--active">MANUAL</td>
+                    <td>720.00</td>
+                    <td>1.00</td>
+                    <td>SINE</td>
+                    <td><i class="fa-solid fa-gear"></i></td>
+                    <td><input 
+                              type="number"
+                              step="any"
+                              style="width:100%; height:100%; margin:0; padding:0;border:none; text-align: center;"/>
+                    </td>
+                    <td><i class="fa-solid fa-right-long"></i></td>
+                    <td>--.--</td>
+                    <td><i class="fa-solid fa-check"></i></td>
+                    <td>1</td>
+                    <td><i class="fa-solid fa-flag"></i></td>                    
+                  </tr>
+                  <tr>
+                    <td><i class="fa-solid fa-arrows-rotate"></i></td>
+                    <td><div class="led-off"></div></td>
+                    <td><i>disconnect</i></td>
+                    <td>1</td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-play"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-pause"></i></td>
+                    <td class = "pumplist-container__table--active"><i class="fa-solid fa-stop"></i></td>
+                    <td class ="pumplist-container__table--active">MANUAL</td>
+                    <td>720.00</td>
+                    <td>1.00</td>
+                    <td>SINE</td>
+                    <td><i class="fa-solid fa-gear"></i></td>
+                    <td><input 
+                              type="number"
+                              step="any"
+                              style="width:100%; height:100%; margin:0; padding:0;border:none; text-align: center;"/>
+                    </td>
+                    <td><i class="fa-solid fa-right-long"></i></td>
+                    <td>--.--</td>
+                    <td><i class="fa-solid fa-check"></i></td>
+                    <td>1</td>
+                    <td><i class="fa-solid fa-flag"></i></td>                    
+                  </tr>
+                </tbody>
+                
+              </table>
+              </div>
+            </dialog>
+          </div>
+          <div class="status-container">
+            <div id="statusLed" class="led-off"></div>
+            <input
+              disabled
+              id="inStatus"
+              class="status-container__input"
+              value="disconnect"
+            />
+            <button id="btnReset" class="status-container__reset-btn">
+              Reset
+            </button>
+            <button id="btnAllReset" class="status-container__reset-btn">
+              All Reset
+            </button>
+          </div>
+        </div>
+        <div class="wrapper-mode">
+          <div class="mode-container">
+            <div id="dispMODE" class="mode-container__input">
+              <div class="mode-container__option" name="modeOptions">MANUAL</div>
+              <div class="mode-container__option mode-container__option--none" name="modeOptions">ANALOG</div>
+              <div class="mode-container__option mode-container__option--none" name="modeOptions">PULSE</div>
+              <div class="mode-container__option mode-container__option--none" name="modeOptions">BATCH</div>
+              <div class="mode-container__option mode-container__option--none" name="modeOptions">MAX</div>
+              <div class="mode-container__option mode-container__option--none" name="modeOptions">TOP/BOTTOM</div>
+              <div class="mode-container__option mode-container__option--none" name="modeOptions">DEGAS</div>
+              <div class="mode-container__option mode-container__option--none" name="modeOptions">TUNING</div>
+<!--圧力推定
+              <div class="mode-container__option mode-container__option--none" name="modeOptions">EST_CAL</div>
+-->
+            </div>
+            
+          </div>
+          <dialog id="diagMODE" class="mode-diag">
+            <form id="formMODE">
+              <p class="param-diag__title">MODE:</p>
+              <filedset>
+                <div class="param-diag param-diag--mode">
+                  <div class="param_diag__mode-option">
+                    <input
+                      type="radio"
+                      name="inMODE"
+                      value="0"
+                      id="input-mode-0"
+                      class="param_diag__radio"
+                    />
+                    <label for="input-mode-0">MANUAL</label>
+                  </div>
+                  <div class="param_diag__mode-option">
+                    <input
+                      type="radio"
+                      name="inMODE"
+                      value="1"
+                      id="input-mode-1"
+                      class="param_diag__radio"
+                    />
+                    <label for="input-mode-1">ANALOG</label>
+                  </div>
+                  <div class="param_diag__mode-option">
+                    <input
+                      type="radio"
+                      name="inMODE"
+                      value="2"
+                      id="input-mode-2"
+                      class="param_diag__radio"
+                    />
+                    <label for="input-mode-2">PULSE</label>
+                  </div>
+                  <div class="param_diag__mode-option">
+                    <input
+                      type="radio"
+                      name="inMODE"
+                      value="3"
+                      id="input-mode-3"
+                      class="param_diag__radio"
+                    />
+                    <label for="input-mode-3">BATCH</label>
+                  </div>
+                  <div class="param_diag__mode-option">
+                    <input
+                      type="radio"
+                      name="inMODE"
+                      value="4"
+                      id="input-mode-4"
+                      class="param_diag__radio"
+                    />
+                    <label for="input-mode-4">MAX</label>
+                  </div>
+                  <div class="param_diag__mode-option">
+                    <input
+                      type="radio"
+                      name="inMODE"
+                      value="6"
+                      id="input-mode-6"
+                      class="param_diag__radio"
+                    />
+                    <label for="input-mode-6">TOP/BOTTOM</label>
+                  </div>
+                  <div class="param_diag__mode-option">
+                    <input
+                      type="radio"
+                      name="inMODE"
+                      value="8"
+                      id="input-mode-8"
+                      class="param_diag__radio"
+                    />
+                    <label for="input-mode-8">DEGAS</label>
+                  </div>
+                  <div class="param_diag__mode-option">
+                    <input
+                      type="radio"
+                      name="inMODE"
+                      value="10"
+                      id="input-mode-10"
+                      class="param_diag__radio"
+                    />
+                    <label for="input-mode-10">TUNING</label>
+                  </div>
+<!--圧力推定                
+                  <div class="param_diag__mode-option">
+                    <input
+                      type="radio"
+                      name="inMODE"
+                      value="13"
+                      id="input-mode-13"
+                      class="param_diag__radio"
+                    />
+                    <label for="input-mode-13">EST_CAL</label>
+                  </div>
+-->
+                </div>
+              </filedset>
+
+              <div class="param-diag__btn-container">
+                <button id="cancelMODE" type="button" class="param-diag__btn">
+                  CANCEL
+                </button>
+                <button
+                  id="okMODE"
+                  type="submit"
+                  class="param-diag__btn param-diag__btn--ok"
+                >
+                  OK
+                </button>
+              </div>
+            </form>
+          </dialog>
+          <div class="mode-setting-container">
+            <div class="mode-setting" name="modeSettingOptions">
+            </div><!-- MANUAL -->
+            <div class="mode-setting mode-setting--none " name="modeSettingOptions">
+              <button class="mode-setting__btn" id="analogSpmSettings"><i class="fa-solid fa-gear"></i>
+                SPM Scaling
+              </button>
+              <dialog id="diagANA_SPM" class="spm-diag param-diag">
+                <form id="formANA_SPM">
+                  <p class="param-diag__title">SPM Scaling</p>
+                  <div class="param-diag__input-container">
+                    <label class="param-diag__input-label" for="inANA_SPM_MIN">4mA:</label>
+                    <input
+                      type="number"
+                      step="any"
+                      id="inANA_SPM_MIN"
+                      name="inANA_SPM_MIN"
+                      onfocus="this.select();"
+                      class="param-diag__input no-spin"
+                    />
+                  </div>
+                  <div class="param-diag__input-container">
+                    <label class="param-diag__input-label" for="inANA_SPM_MAX">20mA:</label>
+                    <input
+                      type="number"
+                      step="any"
+                      id="inANA_SPM_MAX"
+                      name="inANA_SPM_MAX"
+                      onfocus="this.select();"
+                      class="param-diag__input no-spin"
+                    />
+                  </div>
+                  <!-- モーダルウィンドウ内を閉じるボタンの指定 -->
+                  <div class="param-diag__btn-container">
+                    <button id="cancelANA_SPM" type="button" class="param-diag__btn">
+                      CANCEL
+                    </button>
+                    <button
+                      id="okANA_SPM"
+                      type="submit"
+                      class="param-diag__btn param-diag__btn--ok"
+                    >
+                      OK
+                    </button>
+                  </div>
+                </form>
+              </dialog>
+            </div><!-- ANALOG -->
+            <div class="mode-setting mode-setting--none" name="modeSettingOptions">
+              <button class="mode-setting__btn" id="pulseSpmSettings"><i class="fa-solid fa-gear"></i>
+                SPM Scaling
+              </button>
+              <dialog id="diagPLS_SPM" class="spm-diag param-diag">
+                <form id="formPLS_SPM">
+                  <p class="param-diag__title">SPM Scaling</p>
+                  <div class="param-diag__input-container">
+                    <label class="param-diag__input-label" for="inPLS_SPM_MIN">100Hz:</label>
+                    <input
+                      type="number"
+                      step="any"
+                      id="inPLS_SPM_MIN"
+                      name="inPLS_SPM_MIN"
+                      onfocus="this.select();"
+                      class="param-diag__input no-spin"
+                    />
+                  </div>
+                  <div class="param-diag__input-container">
+                    <label class="param-diag__input-label" for="inPLS_SPM_MAX">200Hz:</label>
+                    <input
+                      type="number"
+                      step="any"
+                      id="inPLS_SPM_MAX"
+                      name="inPLS_SPM_MAX"
+                      onfocus="this.select();"
+                      class="param-diag__input no-spin"
+                    />
+                  </div>
+                  <!-- モーダルウィンドウ内を閉じるボタンの指定 -->
+                  <div class="param-diag__btn-container">
+                    <button id="cancelPLS_SPM" type="button" class="param-diag__btn">
+                      CANCEL
+                    </button>
+                    <button
+                      id="okPLS_SPM"
+                      type="submit"
+                      class="param-diag__btn param-diag__btn--ok"
+                    >
+                      OK
+                    </button>
+                  </div>
+                </form>
+              </dialog>
+            </div><!-- PULSE -->
+            <div class="mode-setting mode-setting--none" name="modeSettingOptions">
+              <div class = "mode-setting__batch-container">
+                <div class = "mode-setting__batch-set">
+                  <input
+                    type="number"
+                    step="any"
+                    id="setBatch"
+                    name="setBatch"
+                    style="width:100%;"
+                    class = "no-spin"
+                    onfocus="this.select();"
+                  />
+                </div>
+                <div class="mode-setting__batch-add" id = "addBatch">
+                  <i class="fa-solid fa-right-long" style = "width:100%;"></i>
+                </div>
+                <div class="mode-setting__batch-left">
+                  <input
+                    type="number"
+                    step="any"
+                    id="totalBatch"
+                    name="totalBatch"
+                    readonly
+                    style="width:100%;"
+                  />
+                </div>
+              </div>
+            </div><!-- BATCH -->
+            <div class="mode-setting mode-setting--none" name="modeSettingOptions"></div><!-- MAX -->
+            <div class="mode-setting mode-setting--none" name="modeSettingOptions">
+              <div class="mode-setting__tb-container">
+                <button id="topBtn" type="button" >TOP</button>
+                <button id="bottomBtn" type="button" >BOTTOM</button>
+              </div>
+            </div><!-- TOP/BOTTOM -->
+            <div class="mode-setting mode-setting--none" name="modeSettingOptions"></div><!-- DEGAS -->
+            <div class="mode-setting mode-setting--none" name="modeSettingOptions">
+              <div id="tuningText" class = "mode-setting__tuning-container--none">
+                <p class = "tuning-progress">Processing</p>
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+              </div>     
+            </div><!-- TUNING -->
+            <div class="mode-setting mode-setting--none" name="modeSettingOptions">
+              <div id="estCalText" class = "mode-setting__tuning-container--none">
+                <p class = "tuning-progress">Processing</p>
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+                  <div class="dot"></div>
+              </div>     
+            </div><!-- TUNING -->
+
+          </div>
+        </div>
+
+        <div class="wrapper-parameter">
+          <div class="spm-container">
+            <input
+              class="spm-container__input"
+              type="number"
+              step="any"
+              id="dispSPM"
+              name="dispSPM"
+              readonly
+            />
+          </div>
+          <dialog id="diagSPM" class="spm-diag param-diag">
+            <!-- モーダルウィンドウ内のテキストの指定 -->
+            <form id="formSPM">
+              <p class="param-diag__title">SPM:</p>
+              <div class="param-diag__input-container">
+                <input
+                  type="number"
+                  step="any"
+                  id="inSPM"
+                  name="inSPM"
+                  onfocus="this.select();"
+                  class="param-diag__input no-spin"
+                />
+              </div>
+              <!-- モーダルウィンドウ内を閉じるボタンの指定 -->
+              <div class="param-diag__btn-container">
+                <button id="cancelSPM" type="button" class="param-diag__btn">
+                  CANCEL
+                </button>
+                <button
+                  id="okSPM"
+                  type="submit"
+                  class="param-diag__btn param-diag__btn--ok"
+                >
+                  OK
+                </button>
+              </div>
+            </form>
+          </dialog>
+
+          <div class="sl-container">
+            <input
+              class="sl-container__input"
+              type="number"
+              step="any"
+              id="dispSL"
+              name="dispSL"
+              readonly
+            />
+          </div>
+          <dialog id="diagSL" class="param-diag">
+            <!-- モーダルウィンドウ内のテキストの指定 -->
+            <form id="formSL">
+              <p class="param-diag__title">SL:</p>
+              <div class="param-diag__input-container">
+                <input
+                  type="number"
+                  step="any"
+                  id="inSL"
+                  name="inSL"
+                  onfocus="this.select();"
+                  class="param-diag__input no-spin"
+                />
+              </div>
+              <!-- モーダルウィンドウ内を閉じるボタンの指定 -->
+              <div class="param-diag__btn-container">
+                <button id="cancelSL" type="button" class="param-diag__btn">
+                  CANCEL
+                </button>
+                <button
+                  id="okSL"
+                  type="submit"
+                  class="param-diag__btn param-diag__btn--ok"
+                >
+                  OK
+                </button>
+              </div>
+            </form>
+          </dialog>
+
+          <div class="type-container" id="dispTYPE">
+            <div class="type-container__option" name="typeOptions">
+              SINE<img
+                class="type-container__icon"
+                src="../../common/img/sine.png"
+              />
+            </div>
+            <div class="type-container__option type-container__option--none"
+              name="typeOptions"
+            >
+              PULSE<img
+                class="type-container__icon"
+                src="../../common/img/pulse.png"
+              />
+            </div>
+            <div
+              class="type-container__option type-container__option--none"
+              name="typeOptions"
+            >
+              CONT<img
+                class="type-container__icon"
+                src="../../common/img/cont.png"
+              />
+            </div>
+            <div
+              class="type-container__option type-container__option--none"
+              name="typeOptions"
+            >
+              VISC<img
+                class="type-container__icon"
+                src="../../common/img/visc.png"
+              />
+            </div>
+          </div>
+
+          <dialog id="diagTYPE" class="param-diag">
+            <!-- モーダルウィンドウ内のテキストの指定 -->
+            <form id="formTYPE">
+              <p class="param-diag__title">TYPE:</p>
+              <filedset>
+                <input
+                  type="radio"
+                  name="inTYPE"
+                  value="0"
+                  id="input-type-0"
+                  class="param_diag__radio"
+                  checked
+                />
+                <label class="type-container__option" for="input-type-0"
+                  >SINE<img
+                    class="type-container__icon"
+                    src="../../common/img/sine.png" /></label
+                ><br />
+                <input
+                  type="radio"
+                  name="inTYPE"
+                  value="1"
+                  id="input-type-1"
+                  class="param_diag__radio"
+                />
+                <label class="type-container__option" for="input-type-1"
+                  >PULSE<img
+                    class="type-container__icon"
+                    src="../../common/img/pulse.png" /></label
+                ><br />
+                <input
+                  type="radio"
+                  name="inTYPE"
+                  value="2"
+                  id="input-type-2"
+                  class="param_diag__radio"
+                />
+                <label class="type-container__option" for="input-type-2"
+                  >CONT<img
+                    class="type-container__icon"
+                    src="../../common/img/cont.png" /></label
+                ><br />
+                <input
+                  type="radio"
+                  name="inTYPE"
+                  value="3"
+                  id="input-type-3"
+                  class="param_diag__radio"
+                />
+                <label class="type-container__option" for="input-type-3"
+                  >VISC<img
+                    class="type-container__icon"
+                    src="../../common/img/visc.png" /></label
+                ><br />
+              </filedset>
+
+              <!-- モーダルウィンドウ内を閉じるボタンの指定 -->
+              <div class="param-diag__btn-container">
+                <button id="cancelTYPE" type="button" class="param-diag__btn">
+                  CANCEL
+                </button>
+                <button
+                  id="okTYPE"
+                  type="submit"
+                  class="param-diag__btn param-diag__btn--ok"
+                >
+                  OK
+                </button>
+              </div>
+            </form>
+          </dialog>
+        </div>
+
+        <div class="wrapper-drive">
+          <button id="btnRUN" class="btn-drive">
+            <i class="fa-solid fa-play btn-drive__icon"></i>RUN
+          </button>
+          <button id="btnPAUSE" class="btn-drive">
+            <i class="fa-solid fa-pause btn-drive__icon"></i>PAUSE
+          </button>
+          <button id="btnSTOP" class="btn-drive">
+            <i class="fa-solid fa-stop btn-drive__icon"></i>STOP
+          </button>
+        </div>
+
+        <br />
+        <div class="sync-view">
+          <div class="check_item">
+            <input type="checkbox" name="check01" class="check" id="syncCheck">
+            <label for="syncCheck" class="check_label">SYNC</label>
+          </div>
+          <div class="sync-setting sync-setting--none" id="syncSetting">
+          <div class = "sync-setting__container">
+            <div class ="sync-setting__alert" id="modeSettingSyncAlert">
+              ※Check SyncPumps Settings※
+            </div>
+            <button id="syncSettingBtn" class="sync-setting__btn">
+              <i class="fa-solid fa-gear"></i>SYNC Pumps
+            </button>
+            <div class="sync-setting__info">
+              <div>
+                <p id="currentGroupDisplay">Group </p>
+              </div>
+              <div>
+                <p id="currentTotalPumpsDisplay">TOTAL  Pumps</p>
+              </div>
+            </div>                
+          </div>
+          <!-- diagSYNCがあった場所-->
+        </div><!-- SYNC -->
+        <dialog id="diagSYNC" >
+            <div id = "syncAnimoSpinner" class="animoSpinner"></div>
+            <div  class="sync-setting-diag">
+              <div class="sync-pumps-explain">
+                <div class="sync-select__id-container">
+                  <div class="sync-select__box sync-select__box--main"></div>
+                  <p class="sync-select__idnum">Main</p>
+                </div>
+                <div class="sync-select__id-container">
+                  <div class="sync-select__box sync-select__box--sub"></div>
+                  <p class="sync-select__idnum">Sub</p>
+                </div>
+                <div class="sync-select__id-container">
+                  <div class="sync-select__box sync-select__box--otherG"></div>
+                  <p class="sync-select__idnum">OtherGroup</p>
+                </div>
+                <div class="sync-select__id-container">
+                  <div class="sync-select__box sync-select__box--disconnect"></div>
+                  <p class="sync-select__idnum">Disconnect</p>
+                </div>
+
+              </div>
+              <div id="syncPumpsList" class="sync-pumps-container">
+
+              <div
+                class="sync-select__id-container"
+                name="syncSelectId"
+                onclick="syncModalHandler.openSyncModal(this,1)"
+              >
+                <div class="sync-select__box"></div>
+                <p class="sync-select__idnum">ID:1</p>
+              </div>
+
+              <div
+                class="sync-select__id-container"
+                name="syncSelectId"
+                onclick="syncModalHandler.openSyncModal(this,2)"
+              >
+                <div class="sync-select__box"></div>
+                <p class="sync-select__idnum">ID:2</p>
+              </div>
+
+              <div
+                class="sync-select__id-container"
+                name="syncSelectId"
+                onclick="syncModalHandler.openSyncModal(this,3)"
+              >
+                <div class="sync-select__box"></div>
+                <p class="sync-select__idnum">ID:3</p>
+              </div>
+
+              <div
+                class="sync-select__id-container"
+                name="syncSelectId"
+                onclick="syncModalHandler.openSyncModal(this,4)"
+              >
+                <div class="sync-select__box"></div>
+                <p class="sync-select__idnum">ID:4</p>
+              </div>
+
+              <div
+                class="sync-select__id-container"
+                name="syncSelectId"
+                onclick="syncModalHandler.openSyncModal(this,5)"
+              >
+                <div class="sync-select__box"></div>
+                <p class="sync-select__idnum">ID:5</p>
+              </div>
+
+              <div
+                class="sync-select__id-container"
+                name="syncSelectId"
+                onclick="syncModalHandler.openSyncModal(this,6)"
+              >
+                <div class="sync-select__box"></div>
+                <p class="sync-select__idnum">ID:6</p>
+              </div>
+
+              <div
+                class="sync-select__id-container"
+                name="syncSelectId"
+                onclick="syncModalHandler.openSyncModal(this,7)"
+              >
+                <div class="sync-select__box"></div>
+                <p class="sync-select__idnum">ID:7</p>
+              </div>
+
+              <div
+                class="sync-select__id-container"
+                name="syncSelectId"
+                onclick="syncModalHandler.openSyncModal(this,8)"
+              >
+                <div class="sync-select__box"></div>
+                <p class="sync-select__idnum">ID:8</p>
+              </div>
+
+              <div
+                class="sync-select__id-container"
+                name="syncSelectId"
+                onclick="syncModalHandler.openSyncModal(this,9)"
+              >
+                <div class="sync-select__box"></div>
+                <p class="sync-select__idnum">ID:9</p>
+              </div>
+
+              <div
+                class="sync-select__id-container"
+                name="syncSelectId"
+                onclick="syncModalHandler.openSyncModal(this,10)"
+              >
+                <div class="sync-select__box"></div>
+                <p class="sync-select__idnum">ID:10</p>
+              </div>
+
+              <div
+                class="sync-select__id-container"
+                name="syncSelectId"
+                onclick="syncModalHandler.openSyncModal(this,11)"
+              >
+                <div class="sync-select__box"></div>
+                <p class="sync-select__idnum">ID:11</p>
+              </div>
+
+              <div
+                class="sync-select__id-container"
+                name="syncSelectId"
+                onclick="syncModalHandler.openSyncModal(this,12)"
+              >
+                <div class="sync-select__box"></div>
+                <p class="sync-select__idnum">ID:12</p>
+              </div>
+
+              <div
+                class="sync-select__id-container"
+                name="syncSelectId"
+                onclick="syncModalHandler.openSyncModal(this,13)"
+              >
+                <div class="sync-select__box"></div>
+                <p class="sync-select__idnum">ID:13</p>
+              </div>
+
+              <div
+                class="sync-select__id-container"
+                name="syncSelectId"
+                onclick="syncModalHandler.openSyncModal(this,14)"
+              >
+                <div class="sync-select__box"></div>
+                <p class="sync-select__idnum">ID:14</p>
+              </div>
+
+              <div
+                class="sync-select__id-container"
+                name="syncSelectId"
+                onclick="syncModalHandler.openSyncModal(this,15)"
+              >
+                <div class="sync-select__box"></div>
+                <p class="sync-select__idnum">ID:15</p>
+              </div>
+
+            </div>
+              <div class="sync-pumps-group">
+              <label><input type="radio" name="syncGroupRadio" value="1" checked> Group 1</label>
+              <label><input type="radio" name="syncGroupRadio" value="2"> Group 2</label>
+              <label><input type="radio" name="syncGroupRadio" value="3"> Group 3</label>
+              <label><input type="radio" name="syncGroupRadio" value="4"> Group 4</label>
+              <label><input type="radio" name="syncGroupRadio" value="5"> Group 5</label>
+              <label><input type="radio" name="syncGroupRadio" value="6"> Group 6</label>
+            </div>
+              <div id="syncPumpAlert" class="sync-pumps-alert">
+                SYNC_ID, SYNC_GROUPまたはSYNC_TOTALが正常に設定されていません。
+              </div>
+              <div id="syncSelectModal" class="select-sync__modal-backdrop" onclick="syncModalHandler.closeSyncModal()">
+              <div id="syncSelectPopUp"  class="syncSelectPopUp"　>
+                <input
+                  type="radio"
+                  name="selectSyncRole"
+                  value="main"
+                  class="sync-select__radio"
+                  id="syncRoleMain"
+                />
+                <label class="select-sync__option" for="syncRoleMain"
+                  ><div class="select-sync__option-box select-sync__option-box--main"></div>
+                  Main</label
+                >
+
+                <input
+                  type="radio"
+                  name="selectSyncRole"
+                  value="sub"
+                  class="sync-select__radio"
+                  id="syncRoleSub"
+                />
+                <label class="select-sync__option" for="syncRoleSub"
+                  ><div class="select-sync__option-box select-sync__option-box--sub"></div>
+                  Sub</label
+                >
+
+                <input
+                  type="radio"
+                  name="selectSyncRole"
+                  value="none"
+                  class="sync-select__radio"
+                 id="syncRoleNone"
+                />
+                <label class="select-sync__option" for="syncRoleNone">
+                  <div class="select-sync__option-box select-sync__option-box--none"></div>
+                  None</label
+                >
+              </div>
+            </div>
+            </div> 
+             <div class="param-diag__btn-container">
+              <button id="cancelSYNC" type="button" class="param-diag__btn">
+                CANCEL
+              </button>
+              <button
+                id="okSYNC"
+                type="button"
+                class="param-diag__btn param-diag__btn--ok"
+              >
+                OK
+              </button>
+            </div>
+          </dialog>
+        </div>
+        <textarea id="pageConsole" class="page-console" readonly></textarea>
+        <!-- デモ用
+        Group:<input id="mixtureGroup1" type="number" min="1" max="6" value="1"> 
+        Group:<input id="mixtureGroup2" type="number" min="1" max="6" value="2"> <br>
+        Ratio:<p id="mixtureRatioDisp" style="display:inline">50</p>
+        <input id="mixtureRatio" type="range" name="mixture" min="5" max="95" step="5" value="50"> 
+        -->     
+      </div>
+      <div class="logging-view" id="loggingView">
+        
+        
+<!-- 圧力推定
+        <input type="number" id="inEstPs" readonly>MPa
+-->
+        
+        
+        
+        <textarea id="loggingConsole" class="logging-console"></textarea>
+        <div style="display:flex; align-items: center;">
+        <input type="checkbox" id="inLoggingStart" />
+          <p>
+            <label for ="inLoggingStart">Logging</label>
+          </p>
+        </div>
+        <div style="display: grid; grid-template-rows: 1fr 1fr; grid-template-columns: 6rem 10rem 20rem; font-size:1rem;" >
+          <div>Address</div>
+          <input type="any" id="inLoggingAddress" style="height: 1.5rem;"/>
+          <div>※複数アドレスは「,」で区切る</div>
+          <div>Interval</div>
+          <input type="num" value="1000" id="inLoggingInterval" min="500" style="height: 1.5rem;" />※単位[ms]。最小値500
+        </div>
+        <div>
+          <div>折り返し点※0.01-1[-] (0.25-0.75推奨)</div>
+          <input type="num" id="inContPeak" min="0.01" max="1"  />
+          <button id="writeContPeak" type="button">write</button>
+          <button id="readContPeak" type="button">read</button>
+          
+          <div>LED輝度※0.1-100[%] (直視するときは1-2推奨)</div>
+          <input type="num" id="inLedBri" min="0.1" max="100"  />
+          <button id="writeLedBri" type="button">write</button>
+          <button id="readLedBri" type="button">read</button>
+        </div>
+      </div>
+
+      <!-- ローカルで開いた際にローカル上のファイルを読まなくていい様にimportやrequireはしない -->
+    </div>
+    <!-- importするとローカルで開いた際にファイルアクセス許可を求められるので以下の様にした -->
+    <script src="../../common/js/util.js" 　defer></script>
+    <script src="../../common/js/registerTable.js" 　defer></script>
+    <script src="../../common/js/serialPort.js" 　defer></script>
+    <script src="../../common/js/modbusRTU.js" 　defer></script>
+    <script src="./js/script.js" 　defer></script>
+  </body>
+</html>
