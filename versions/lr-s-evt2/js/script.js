@@ -27,6 +27,7 @@ const ModeNum = {
   PS_EST_TUNING:13
 };
 const TypeChar = ["SINE", "PULSE", "CONT", "VISC", "S_CONT"];
+const SyncRegList = [40051, 40061, 40081, 40091, 40101, 40102, 40103, 40104];//MODE, TYPE, SPM, SL. SYNC_ID, SYNC_GROUP, SYNC_TOTAL, SYNC_ENABLE
 
 /*レジスタテーブル初期化*/
 const pumpsNum = 16;
@@ -1913,7 +1914,7 @@ const serialConnectionManager = {
         return;
       }
       self.loadingAnime.className = "animoSpinner";
-      await modbus.syncAllPumps().catch((e)=>textLog(e));
+      await modbus.syncAllPumps(SyncRegList).catch((e)=>textLog(e));
       idHandler.setValue(modbus.availablePumpsList.findIndex((tf) => tf === true));
       self.loadingAnime.className = "animoSpinner animoSpinner--none";
       if (idHandler.slaveID == -1) {

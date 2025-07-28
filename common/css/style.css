@@ -849,7 +849,7 @@ header{
 }
 
 .spm-container::after {
-  content: "SPM";
+  content: var(--after-content, 'SPM');
   position: absolute;
   bottom: 0;
   right: 0.5rem;

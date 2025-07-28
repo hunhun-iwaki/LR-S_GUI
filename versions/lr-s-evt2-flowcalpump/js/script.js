@@ -27,6 +27,7 @@ const ModeNum = {
   PS_EST_TUNING:13
 };
 const TypeChar = ["SINE", "PULSE", "CONT", "VISC", "S_CONT"];
+const SyncRegList = [40051, 40061, 40081, 40091, 40101, 40102, 40103, 40104, 40711, 40719];//MODE, TYPE, SPM, SL. SYNC_ID, SYNC_GROUP, SYNC_TOTAL, SYNC_ENABLE, FLOW_RATE, SPM_MODE
 
 /*レジスタテーブル初期化*/
 const pumpsNum = 16;
@@ -87,11 +88,42 @@ const activePump = {
   }
 }
 
+/*流量単位管理*/
 const flowUnit = {
   flowUnitToggle : document.getElementById("flowUnitToggle"),
-  changeUnit: function(){
+  spmAfter : document.querySelector('.spm-container'),
+  spmDiagTitle: document.getElementById("spmDiagTitle"),
+  updateUnit: function(){
+    const self = this;
+    if(regTable.getData(idHandler.slaveID,40719) == 1){
+      self.flowUnitToggle.checked = true;
+      self.spmAfter.style.setProperty('--after-content', '"mL/min"');
+      self.spmDiagTitle.textContent = "mL/min";
+      spmHandler.setValue(regTable.getData(idHandler.slaveID,40711))
+    }else{
+      self.flowUnitToggle.checked = false;
+      self.spmAfter.style.setProperty('--after-content', '"SPM"');
+      self.spmDiagTitle.textContent = "SPM";
+      spmHandler.setValue(regTable.getData(idHandler.slaveID,40081))    
+    }
+  },
+  init: function(){
+    const self = this;
+    self.flowUnitToggle.addEventListener(
+      "change",
+      async function () {
+        if(self.flowUnitToggle.checked){
+          await activePump.write(40719,1).catch((e)=>textLog(e));
+        }else{
+          await activePump.write(40719,0).catch((e)=>textLog(e));
+        }
+        self.updateUnit();
+      },
+      false
+    );
   }
 }
+flowUnit.init();
 
 /*ポンプ一括設定ハンドラ*/
 const pumplistControl = {
@@ -1646,32 +1678,63 @@ const spmHandler = {
       async function (event) {
         event.preventDefault(); //ページ遷移回避
         let inputNum = self.inSPM.value;
-        if (inputNum == "") {
-          self.diagSPM.close();
-          return;
-        } else if (inputNum < 0.1) {
-          inputNum = 0.1;
-        } else if (inputNum > 720) {
-          inputNum = 720;
-        } else if (inputNum >= 0.1 && inputNum <= 720) {
-          inputNum = Math.round(inputNum * 10000) / 10000;
-        } else {
-          alert("入力が正しくありません。半角数字で入力してください。");
-          return;
-        }
-        self.setValue(inputNum); 
-        if(regTable.getData(idHandler.slaveID, 40104)===1){
-          try{
-            await activePump.writeSyncPumps(40081, inputNum);
-          }catch(e){
-            textLog(e);
+        if (regTable.getData(idHandler.slaveID, 40719)){
+          if (inputNum == "") {
+            self.diagSPM.close();
+            return;
+          } else if (inputNum < 0.01) {
+            inputNum = 0.01;
+          } else if (inputNum > 50) {
+            inputNum = 50;
+          } else if (inputNum >= 0.01 && inputNum <= 50) {
+            inputNum = Math.round(inputNum * 100) / 100;
+          } else {
+            alert("入力が正しくありません。半角数字で入力してください。");
+            return;
+          }
+          self.setValue(inputNum); 
+          if(regTable.getData(idHandler.slaveID, 40104)===1){
+            try{
+              await activePump.writeSyncPumps(40711, inputNum);
+            }catch(e){
+              textLog(e);
+            }
+          }else{
+            try{
+              await activePump.write(40711, inputNum);
+            }catch(e){
+              textLog(e);
+            }   
           }
         }else{
-          try{
-            await activePump.write(40081, inputNum);
-          }catch(e){
-            textLog(e);
-          }   
+            if (inputNum == "") {
+            self.diagSPM.close();
+            return;
+          } else if (inputNum < 0.1) {
+            inputNum = 0.1;
+          } else if (inputNum > 720) {
+            inputNum = 720;
+          } else if (inputNum >= 0.1 && inputNum <= 720) {
+            inputNum = Math.round(inputNum * 10000) / 10000;
+          } else {
+            alert("入力が正しくありません。半角数字で入力してください。");
+            return;
+          }
+          self.setValue(inputNum); 
+          if(regTable.getData(idHandler.slaveID, 40104)===1){
+            try{
+              await activePump.writeSyncPumps(40081, inputNum);
+            }catch(e){
+              textLog(e);
+            }
+          }else{
+            try{
+              await activePump.write(40081, inputNum);
+            }catch(e){
+              textLog(e);
+            }   
+          }
+
         }
         self.diagSPM.close();
       },
@@ -1707,7 +1770,11 @@ const spmHandler = {
     self.dispSPM.value = value;
   },
   openSettings: async function(){
-    self.inSPM.value = parseFloat(regTable.getData(idHandler.slaveID, 40081).toFixed(7));      
+    if(regTable.getData(idHandler.slaveID,40719) == 1){
+      self.inSPM.value = parseFloat(regTable.getData(idHandler.slaveID, 40711).toFixed(5));
+    }else{
+      self.inSPM.value = parseFloat(regTable.getData(idHandler.slaveID, 40081).toFixed(7));
+    }  
     await new Promise(resolve => {
       // closeイベントリスナーを追加
       self.diagSPM.addEventListener('close', () => {
@@ -1919,7 +1986,7 @@ const serialConnectionManager = {
         return;
       }
       self.loadingAnime.className = "animoSpinner";
-      await modbus.syncAllPumps().catch((e)=>textLog(e));
+      await modbus.syncAllPumps(SyncRegList).catch((e)=>textLog(e));
       idHandler.setValue(modbus.availablePumpsList.findIndex((tf) => tf === true));
       self.loadingAnime.className = "animoSpinner animoSpinner--none";
       if (idHandler.slaveID == -1) {
@@ -2124,6 +2191,7 @@ const MainView = {
           slHandler.inputEnable();
           typeHandler.inputEnable();
           spmHandler.setValue(regTable.getData(idHandler.slaveID, 40081));
+          flowUnit.updateUnit();
           slHandler.setValue(regTable.getData(idHandler.slaveID, 40091));
           typeHandler.setValue(regTable.getData(idHandler.slaveID, 40061));
         }
@@ -2147,6 +2215,7 @@ const MainView = {
           slHandler.inputEnable();
           typeHandler.inputEnable();
           spmHandler.setValue(regTable.getData(idHandler.slaveID, 40081));
+          flowUnit.updateUnit();
           slHandler.setValue(regTable.getData(idHandler.slaveID, 40091));
           typeHandler.setValue(regTable.getData(idHandler.slaveID, 40061));
         }

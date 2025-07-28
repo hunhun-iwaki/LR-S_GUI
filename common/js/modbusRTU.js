@@ -94,8 +94,7 @@ class ModbusRTU {
     }
   }
   
-  async syncPump(id){
-    const regList = [40051, 40061, 40081, 40091, 40101, 40102, 40103, 40104];//MODE, TYPE, SPM, SL. SYNC_ID, SYNC_GROUP, SYNC_TOTAL, SYNC_ENABLE
+  async syncPump(id,regList){
     const listSize = regList.length;
     for (let i = 0; i < listSize; i++){
       const value = await this.read(id, regList[i]);
@@ -116,11 +115,11 @@ class ModbusRTU {
     */
   }
   
-  async syncAllPumps(){
+  async syncAllPumps(regList){
     let i;
     
     for (i = 1; i < this.pumpsNum; i++){
-      await this.syncPump(i).catch((e) => {this.availablePumpsList[i] = false;})
+      await this.syncPump(i,regList).catch((e) => {this.availablePumpsList[i] = false;})
     }
   }
 
