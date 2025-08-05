@@ -1316,6 +1316,8 @@ const syncControl = {
           textLog(e);
         }
 
+        MainView.forcedUpdate();
+
     });
     
     
@@ -1554,6 +1556,7 @@ const modeHandler = {
           textLog(e);
         }
         self.updateModeView(value);
+        MainView.forcedUpdate();
         self.diagMODE.close();
       },
       false
