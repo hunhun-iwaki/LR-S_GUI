@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="../../common/css/style.css" rel="stylesheet" />
+    <link href="../../common/css/all.css" rel="stylesheet" />
+    <title>LR-S</title>
+  </head>
+
+  <body>
+    <header>
+      <h1 class="title">LR-S</h1>
+      <button id="serialConnect" class="btn-connect">接続</button>
+      <div id="loadingAnime" class="animoSpinner animoSpinner--none"></div>
+      <br />
+    </header>
+    <hr class="divider" />
+
+    <!-- importするとローカルで開いた際にファイルアクセス許可を求められるので以下の様にした -->
+    <script src="../../common/js/util.js" 　defer></script>
+    <script src="../../common/js/registerTable.js" 　defer></script>
+    <script src="./js/serialPort.js" 　defer></script>
+    <script src="./js/modbusRTU.js" 　defer></script>
+    <script src="./js/script.js" 　defer></script>
+  </body>
+</html>

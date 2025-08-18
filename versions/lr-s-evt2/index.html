@@ -1205,8 +1205,8 @@
           <input type="num" value="1000" id="inLoggingInterval" min="500" style="height: 1.5rem;" />※単位[ms]。最小値500
         </div>
         <div>
-          <div>折り返し点※0.01-1[-] (0.25-0.75推奨)</div>
-          <input type="num" id="inContPeak" min="0.01" max="1"  />
+          <div>折り返し点※0.0001-1[-] (0.25-0.75推奨)</div>
+          <input type="num" id="inContPeak" min="0.0001" max="1" step="0.0001" />
           <button id="writeContPeak" type="button">write</button>
           <button id="readContPeak" type="button">read</button>
           
