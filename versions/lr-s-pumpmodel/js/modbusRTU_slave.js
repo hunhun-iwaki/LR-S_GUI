@@ -128,7 +128,7 @@ class ModbusRTU_slave {
     }
   }
 
-  #makeSendFrame(id, func, address, data) {
+  #makeRspFrame(id, func, address, data) {
     const id_ub = new Uint8Array([id]);
     const func_ub = new Uint8Array([func]);
 
@@ -177,6 +177,16 @@ class ModbusRTU_slave {
     }
   }
 
+  #makeErrRspFrame(id, func, data) {
+    const id_ub = new Uint8Array([id]);
+    const func_ub = new Uint8Array([func]);
+    const data_ub = new Uint8Array([data]);
+    const rawMsg = mergeUint8Arrays([id_ub, func_ub, data_ub]);
+    const crc = crc16(rawMsg);
+    const crc_ub = new numToUint8Array(crc, 2);
+    return mergeUint8Arrays([rawMsg, crc_ub.reverse()]);
+  }
+
   #readRcvFrame(array) {
     const msg = array.slice(0, array.length - 2);
     const crc = array.slice(-2).reverse();
@@ -191,21 +201,29 @@ class ModbusRTU_slave {
     const id = uint8ArrayToNum(id_ub);
     const func = uint8ArrayToNum(func_ub);
 
-    if(!(func == 3||func == 4 || func == 6 || func == 10)){
-      
+    if(!(func == 0x03||func == 0x04 || func == 0x06 || func == 0x10)){
+      const errFunc = 0x80 & func;
+      const errCode = 0x01;
+      this.#makeErrRspFrame(id,errFunc,errCode);
     }
 
     switch (func) {
       case FC_READ_INPUT:
       case FC_READ_HOLD:
+        {
         const address_ub = data.slice(0,2);
         const items_ub = data.slice(2);
         const address = uint8ArrayToNum(address_ub);
-        const items = uint8ArrayToNum(items_ub);
+        const item_num = uint8ArrayToNum(item_num_ub);
+        let fullAddress ;
         
-        if(func == 3){
-          const fullAddress = 40001+address;
-        }else if()
+        if(func == 0x03){
+          fullAddress = 40001+address;
+        }else if(func == 4){
+          fullAddress = 30001+address;
+        }
+        
+        }
         break;
         
       case FC_WRITE_HOLD:
